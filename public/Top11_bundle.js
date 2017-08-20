@@ -49017,14 +49017,14 @@ var Team = function (_Component) {
 		key: 'render',
 		value: function render() {
 			var _app = this.props._app;
-			var _app$topPlayers = _app.topPlayers,
-			    topPlayers = _app$topPlayers === undefined ? [] : _app$topPlayers;
+			var _app$top = _app.top11,
+			    top11 = _app$top === undefined ? [] : _app$top;
 
 
 			return _react2.default.createElement(
 				'div',
 				{ id: '_thePitch' },
-				topPlayers.map(function (playr) {
+				top11.map(function (playr) {
 					return _react2.default.createElement(Player, _extends({ key: '' + playr.id + playr.team_id }, playr));
 				})
 			);
@@ -54061,9 +54061,18 @@ exports.default = function () {
 
     switch (action.type) {
 
-        case '_APP:FETCHED_INIT_DATA':
         case '_APP:FETCHING_INIT_DATA':
             return _extends({}, state, action.payload);
+
+        case '_APP:FETCHED_INIT_DATA':
+            var _action$payload = action.payload,
+                favoriteFormation = _action$payload.favoriteFormation,
+                topPlayers = _action$payload.topPlayers;
+
+
+            return _extends({}, state, action.payload, {
+                top11: _initTop11({ favoriteFormation: favoriteFormation, topPlayers: topPlayers })
+            });
 
         default:
             return state;
@@ -54073,12 +54082,27 @@ exports.default = function () {
 
 var _lodash = __webpack_require__(119);
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var init = {};
 
 ;
 
-var findPlayers = function findPlayers(_ref) {
-    var allPlayers = _ref.allPlayers;
+var _initTop11 = function _initTop11(_ref) {
+    var favoriteFormation = _ref.favoriteFormation,
+        topPlayers = _ref.topPlayers;
+    var _favoriteFormation$po = favoriteFormation.positions,
+        positions = _favoriteFormation$po === undefined ? [] : _favoriteFormation$po;
+
+
+    return topPlayers.reduce(function (top, player) {
+
+        return positions.includes(player.saved_position) ? [].concat(_toConsumableArray(top), [player]) : top;
+    }, []);
+};
+
+var findPlayers = function findPlayers(_ref2) {
+    var allPlayers = _ref2.allPlayers;
 
     var top = ['messi', 'ronaldo', 'neymar', 'hazard', 'coutinho', 'pogba', 'verratti', 'alaba', 'ramos', 'pique', 'chiellini', 'alves'];
 

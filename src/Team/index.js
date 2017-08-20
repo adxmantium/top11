@@ -43,12 +43,12 @@ class Team extends Component{
 
 	render(){
 		const { _app } = this.props;
-		const { topPlayers = [] } = _app;
+		const { top11 = [] } = _app;
 
 		return (
 			<div id="_thePitch">
 
-				{ topPlayers.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
+				{ top11.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
 				
 			</div>
 		);
