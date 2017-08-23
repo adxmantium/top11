@@ -8,21 +8,29 @@ body{
 	width: 100vw;
 	height: 100vh;
 	font-family: helvetica;
+	background-color: $silver;
 }
 
 #_thePitch{
-	border: thin solid red;
+	max-width: 800px;
+    margin: auto;
+    border-bottom: 700px solid $nephritis;
+    border-left: 500px solid transparent;
+    border-right: 500px solid transparent;
+    height: 0;
+    padding: 20px 0 0;
+    box-shadow: 0px 16px 25px -14px rgba(0,0,0,0.4);
 }
 
 #_searchContainer{
-	border: thin solid blue;
+	// border: thin solid blue;
 	position: absolute;
 	top: 0; right: 0; bottom: 0; left: 0;
 	background-color: rgba(0,0,0,0.8);
 }
 
 .player-container{
-	border: thin solid blue;
+	// border: thin solid blue;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
