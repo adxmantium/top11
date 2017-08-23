@@ -43,21 +43,37 @@ class Team extends Component{
 
 	render(){
 		const { _app } = this.props;
-		const { top11 = [] } = _app;
+		const { top11 = [], forwards = [], midfielders = [], backs = [], keeper = [] } = _app;
 
 		return (
 			<div id="_thePitch">
 
-				{ top11.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
-				
+				<div className="player-container">
+					{ forwards.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
+				</div>
+
+				<div className="player-container">
+					{ midfielders.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
+				</div>
+
+				<div className="player-container">
+					{ backs.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
+				</div>
+
+				<div className="player-container">
+					{ keeper.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
+				</div>
+
 			</div>
 		);
 	}
 }
 
-const Player = ({ name }) => (
+const Player = ({ name, position, crestUrl }) => (
 	<div className="player">
 		<div>{ name }</div>
+		<div className="team-badge" style={backgroundUrl: crestUrl} />
+		<div>{ position }</div>
 	</div>
 )
 
