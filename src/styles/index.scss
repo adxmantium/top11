@@ -1,10 +1,13 @@
 // /src/styles/index.js
 
+@import './_global.scss';
+
 body{
 	margin: 0;
 	padding: 0;
 	width: 100vw;
 	height: 100vh;
+	font-family: helvetica;
 }
 
 #_thePitch{
@@ -23,12 +26,38 @@ body{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	padding: 20px 0;
 }
 
-.player{
-	border: thin solid orange;
-}
+.player-card{
+	text-align: center;
+    border: 5px solid $wetasphault;
+    width: 160px;
+    height: 100px;
+    position: relative;
+    box-shadow: 5px 5px 4px 0px rgba(0,0,0,0.3);
+	@include bRadius(5px);
+	margin-right: 20px;
+	cursor: pointer;
 
-.team-badge{
-	
+	.badge{
+		position: absolute;
+	    top: 10px;
+	    left: 5px;
+	    bottom: 10px;
+	    width: 35px;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	}
+
+	.info{
+		background-color: $wetasphault;	
+		color: $Fs;
+	    height: 100%;
+	    align-items: flex-end;
+	    justify-content: center;
+	    display: flex;
+	    flex-direction: column;
+	    padding: 0 5px 0 0px;
+	}
 }
