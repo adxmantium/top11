@@ -70,11 +70,13 @@ class Team extends Component{
 }
 
 const Player = ({ name, position, crestUrl }) => (
-	<div className="player-card">
-		<div className="badge" style={{backgroundImage: `url(${crestUrl})`}} />
+	<div className="player-card" style={{backgroundImage: `url(${crestUrl})`}}>
+		<div className="badge-layer" />
+		{/*<div className="badge" >
+		</div>*/}
 		<div className="info">
-			<div>{ name }</div>
-			<div>{ position }</div>
+			<div className="name">{ name }</div>
+			<div className="position">{ position }</div>
 		</div>
 	</div>
 )

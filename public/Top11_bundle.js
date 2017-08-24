@@ -49073,19 +49073,19 @@ var Player = function Player(_ref) {
 	    crestUrl = _ref.crestUrl;
 	return _react2.default.createElement(
 		'div',
-		{ className: 'player-card' },
-		_react2.default.createElement('div', { className: 'badge', style: { backgroundImage: 'url(' + crestUrl + ')' } }),
+		{ className: 'player-card', style: { backgroundImage: 'url(' + crestUrl + ')' } },
+		_react2.default.createElement('div', { className: 'badge-layer' }),
 		_react2.default.createElement(
 			'div',
 			{ className: 'info' },
 			_react2.default.createElement(
 				'div',
-				null,
+				{ className: 'name' },
 				name
 			),
 			_react2.default.createElement(
 				'div',
-				null,
+				{ className: 'position' },
 				position
 			)
 		)
@@ -53249,7 +53249,7 @@ exports = module.exports = __webpack_require__(336)(undefined);
 
 
 // module
-exports.push([module.i, ".stylish-scrollbar-mini::-webkit-scrollbar {\n  width: 5px; }\n\n.stylish-scrollbar-mini::-webkit-scrollbar::-webkit-scrollbar-button {\n  background-color: #eee;\n  height: 0; }\n\n.stylish-scrollbar-mini::-webkit-scrollbar-track {\n  background-color: rgba(0, 0, 0, 0.2); }\n\n.stylish-scrollbar-mini::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.6); }\n\nbody {\n  margin: 0;\n  padding: 0;\n  width: 100vw;\n  height: 100vh;\n  font-family: helvetica;\n  background-color: #bdc3c7; }\n\n#_thePitch {\n  max-width: 800px;\n  margin: auto;\n  border-bottom: 700px solid #27ae60;\n  border-left: 500px solid transparent;\n  border-right: 500px solid transparent;\n  height: 0;\n  padding: 20px 0 0;\n  box-shadow: 0px 16px 25px -14px rgba(0, 0, 0, 0.4); }\n\n#_searchContainer {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-color: rgba(0, 0, 0, 0.8); }\n\n.player-container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  padding: 20px 0; }\n\n.player-card {\n  text-align: center;\n  border: 5px solid #34495e;\n  width: 160px;\n  height: 100px;\n  position: relative;\n  box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.3);\n  -webkit-border-radius: 5px;\n  -moz-border-radius: 5px;\n  -ms-border-radius: 5px;\n  border-radius: 5px;\n  margin-right: 20px;\n  cursor: pointer; }\n  .player-card .badge {\n    position: absolute;\n    top: 10px;\n    left: 5px;\n    bottom: 10px;\n    width: 35px;\n    background-size: cover;\n    background-repeat: no-repeat; }\n  .player-card .info {\n    background-color: #34495e;\n    color: #fff;\n    height: 100%;\n    align-items: flex-end;\n    justify-content: center;\n    display: flex;\n    flex-direction: column;\n    padding: 0 5px 0 0px; }\n", ""]);
+exports.push([module.i, ".stylish-scrollbar-mini::-webkit-scrollbar {\n  width: 5px; }\n\n.stylish-scrollbar-mini::-webkit-scrollbar::-webkit-scrollbar-button {\n  background-color: #eee;\n  height: 0; }\n\n.stylish-scrollbar-mini::-webkit-scrollbar-track {\n  background-color: rgba(0, 0, 0, 0.2); }\n\n.stylish-scrollbar-mini::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.6); }\n\nbody {\n  margin: 0;\n  padding: 0;\n  width: 100vw;\n  height: 100vh;\n  font-family: helvetica;\n  background-color: #bdc3c7; }\n\n#_thePitch {\n  max-width: 800px;\n  margin: auto;\n  border-bottom: 700px solid #27ae60;\n  border-left: 500px solid transparent;\n  border-right: 500px solid transparent;\n  height: 0;\n  padding: 20px 0 0;\n  box-shadow: 0px 16px 25px -14px rgba(0, 0, 0, 0.4); }\n\n#_searchContainer {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-color: rgba(0, 0, 0, 0.8); }\n\n.player-container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  padding: 20px 0; }\n\n.player-card {\n  text-align: center;\n  border: 5px solid #34495e;\n  width: 160px;\n  height: 100px;\n  position: relative;\n  box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.3);\n  -webkit-border-radius: 5px;\n  -moz-border-radius: 5px;\n  -ms-border-radius: 5px;\n  border-radius: 5px;\n  cursor: pointer;\n  background-color: #34495e;\n  background-size: cover;\n  background-position: -72px 0;\n  background-repeat: no-repeat; }\n  .player-card:not(:last-child) {\n    margin-right: 20px; }\n  .player-card:active {\n    box-shadow: none; }\n  .player-card .badge {\n    position: absolute;\n    top: 10px;\n    left: 5px;\n    bottom: 10px;\n    width: 35px; }\n  .player-card .badge-layer {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1;\n    background-color: rgba(52, 73, 94, 0.8); }\n  .player-card .info {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 2;\n    color: #fff;\n    align-items: flex-end;\n    justify-content: center;\n    display: flex;\n    flex-direction: column;\n    padding: 0 5px 0 0px; }\n  .player-card .name {\n    font-size: 16px;\n    font-weight: 500;\n    -webkit-user-select: none;\n    /* Chrome all / Safari all */\n    -moz-user-select: none;\n    /* Firefox all */\n    -ms-user-select: none;\n    /* IE 10+ */\n    user-select: none;\n    /* Likely future */ }\n  .player-card .position {\n    font-size: 14px;\n    font-weight: 200;\n    -webkit-user-select: none;\n    /* Chrome all / Safari all */\n    -moz-user-select: none;\n    /* Firefox all */\n    -ms-user-select: none;\n    /* IE 10+ */\n    user-select: none;\n    /* Likely future */ }\n", ""]);
 
 // exports
 

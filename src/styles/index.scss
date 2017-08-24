@@ -30,7 +30,6 @@ body{
 }
 
 .player-container{
-	// border: thin solid blue;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -45,27 +44,51 @@ body{
     position: relative;
     box-shadow: 5px 5px 4px 0px rgba(0,0,0,0.3);
 	@include bRadius(5px);
-	margin-right: 20px;
 	cursor: pointer;
+	background-color: $wetasphault;	
+	background-size: cover;
+	background-position: -72px 0;
+	background-repeat: no-repeat;
+
+	&:not(:last-child){ margin-right: 20px; }
+	&:active{ box-shadow: none; }
 
 	.badge{
 		position: absolute;
 	    top: 10px;
 	    left: 5px;
 	    bottom: 10px;
-	    width: 35px;
-	    background-size: cover;
-	    background-repeat: no-repeat;
+	    width: 35px; 
+	}	
+
+	.badge-layer{
+		position: absolute;
+		top: 0; right: 0; bottom: 0; left: 0;
+		z-index: 1;
+		background-color: rgba(52, 73, 94, 0.8);
 	}
 
 	.info{
-		background-color: $wetasphault;	
+		position: absolute;
+		top: 0; right: 0; bottom: 0; left: 0;
+		z-index: 2;
 		color: $Fs;
-	    height: 100%;
 	    align-items: flex-end;
 	    justify-content: center;
 	    display: flex;
 	    flex-direction: column;
 	    padding: 0 5px 0 0px;
+	}
+
+	.name{
+		font-size: 16px;
+		font-weight: 500;
+		@include noUserSelect();
+	}
+
+	.position{
+		font-size: 14px;
+		font-weight: 200;
+		@include noUserSelect();
 	}
 }
