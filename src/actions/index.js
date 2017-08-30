@@ -12,6 +12,11 @@ const getTeams = () => axios.get(routes.teams);
 const getTop11 = () => axios.get(routes.top11);
 const getFormations = () => axios.get(routes.formations);
 
+export const openPlayerSearch = data => ({
+  type: '_APP:OPEN_PLAYER_SEARCH',
+  payload: data,
+});
+
 export const initData = () => {
   const pending = 'fetching_init_data',
         done = 'fetched_init_data';

@@ -1,5 +1,7 @@
 // /server/index.js
 
+// COMMAND TO START TOP11 REDIS INSTANCE: redis-server /usr/local/etc/redis-top11.conf
+
 const _ = require('lodash')
 const axios = require('axios')
 const redis = require('redis')

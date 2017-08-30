@@ -11,6 +11,7 @@ body{
 	background-color: $silver;
 }
 
+// pitch related styles
 #_thePitch{
 	max-width: 800px;
     margin: auto;
@@ -22,13 +23,7 @@ body{
     box-shadow: 0px 16px 25px -14px rgba(0,0,0,0.4);
 }
 
-#_searchContainer{
-	// border: thin solid blue;
-	position: absolute;
-	top: 0; right: 0; bottom: 0; left: 0;
-	background-color: rgba(0,0,0,0.8);
-}
-
+// player related styles
 .player-container{
 	display: flex;
 	flex-direction: row;
@@ -92,3 +87,84 @@ body{
 		@include noUserSelect();
 	}
 }
+
+// player search container related styles
+#_playerSearchContainer{
+	position: fixed;
+	top: 0; right: 0; bottom: 0; left: 0;
+	background-color: rgba(0,0,0,0.8);
+	z-index: 2;
+	overflow-y: auto;
+
+	.inner-container{
+		border: thin solid red;
+		max-width: 700px;
+		margin: auto;
+	}
+
+	.title{
+		font-size: 27px;
+		text-align: center;
+		color: $Fs;
+		margin: 30px 0 0;
+	}	
+}
+
+.replacer-container{
+	border: thin solid blue;
+	text-align: center;
+	margin: 30px 0;
+
+	> div{
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.arrow{
+		font-size: 50px;
+		font-weight: 700;
+		color: $Fs;
+		margin: 0 25px;
+	}
+}
+
+.input-wrapper{
+	width: 500px;
+	margin: 0 auto 30px;
+}
+
+.search-input{
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+}
+
+.results-container{
+	border: thin solid green;
+}
+
+.player-result{
+	color: $Fs;
+	border: 1px solid $Fs;
+	padding: 10px;
+	font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

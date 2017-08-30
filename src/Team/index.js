@@ -1,12 +1,18 @@
 // /src/Team/index.js
 
-import { reduce } from 'lodash'
 import io from 'socket.io-client'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 
+// components
+import PlayerCard from './playerCard'
+import PlayerSearchContainer from './../PlayerSearchContainer'
+
 // actions 
-import { initData } from './../actions'
+import { 
+	initData,
+	openPlayerSearch,
+} from './../actions'
 
 // styles
 import './../styles/index.scss'
@@ -18,6 +24,7 @@ class Team extends Component{
 		super(props);
 
 		this._connect = this._connect.bind(this);
+		this._openPlayerSearch = this._openPlayerSearch.bind(this);
 
 		// socket = io(`${window.location.host}:3211`);
 
@@ -41,45 +48,42 @@ class Team extends Component{
 		// });
 	}
 
+	_openPlayerSearch({ player }){
+		const { dispatch } = this.props;
+
+		dispatch( openPlayerSearch({
+			playerToReplace: player,
+			openPlayerSearch: true,
+		}) );
+	}
+
 	render(){
 		const { _app } = this.props;
-		const { top11 = [], forwards = [], midfielders = [], backs = [], keeper = [] } = _app;
+		const { squad = [] } = _app;
 
 		return (
 			<div id="_thePitch">
 
-				<div className="player-container">
-					{ forwards.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
-				</div>
+				{ squad.map((positionZone, i) => 
 
-				<div className="player-container">
-					{ midfielders.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
-				</div>
+					<div key={i} className="player-container">
 
-				<div className="player-container">
-					{ backs.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
-				</div>
+						{ positionZone.map(player => <PlayerCard 
+														key={`${player.id}${player.team_id}`} 
+														{...player} 
+														onClick={ this._openPlayerSearch } />
+						) }
 
-				<div className="player-container">
-					{ keeper.map(playr => <Player key={`${playr.id}${playr.team_id}`} {...playr} />) }
-				</div>
+					</div>) 
+
+				}
+
+				{ _app.openPlayerSearch && <PlayerSearchContainer /> }
 
 			</div>
 		);
 	}
 }
-
-const Player = ({ name, position, crestUrl }) => (
-	<div className="player-card" style={{backgroundImage: `url(${crestUrl})`}}>
-		<div className="badge-layer" />
-		{/*<div className="badge" >
-		</div>*/}
-		<div className="info">
-			<div className="name">{ name }</div>
-			<div className="position">{ position }</div>
-		</div>
-	</div>
-)
 
 const mapStateToProps = (state, props) => {
   return {

@@ -9,6 +9,7 @@ export default function(state = init, action) {
     switch(action.type) {
 
         case '_APP:FETCHING_INIT_DATA':
+        case '_APP:OPEN_PLAYER_SEARCH':
           return {...state, ...action.payload};
 
         case '_APP:FETCHED_INIT_DATA':
@@ -83,6 +84,8 @@ const _filterPositions = ({ top11 }) => {
       positionLists[listName].push( player );
 
     });
+
+    positionLists.squad = positionTypes.map(position => positionLists[position]);
 
     return positionLists;
 }
