@@ -12,6 +12,11 @@ const getTeams = () => axios.get(routes.teams);
 const getTop11 = () => axios.get(routes.top11);
 const getFormations = () => axios.get(routes.formations);
 
+export const updatePlayerResults = data => ({
+  type: '_APP:UPDATE_PLAYER_RESULTS',
+  payload: data,
+});
+
 export const openPlayerSearch = data => ({
   type: '_APP:OPEN_PLAYER_SEARCH',
   payload: data,

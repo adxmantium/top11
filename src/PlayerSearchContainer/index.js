@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 
 // components
+import PlayerResult from './playerResult'
 import PlayerCard from './../Team/playerCard'
 
 // actions 
@@ -15,11 +16,17 @@ import {
 class PlayerSearchContainer extends Component{
 	constructor(props){
 		super(props);
+
+		this._replacePlayer = this._replacePlayer.bind(this);
+	}
+
+	_replacePlayer({ player }){
+		console.log('replace with this player: ', player);
 	}
 
 	render(){
 		const { dispatch, _app } = this.props;
-		const { playerToReplace, searchValue, allPlayers } = _app;
+		const { playerToReplace, searchValue, searchResults } = _app;
 
 		return (
 			<div id="_playerSearchContainer">
@@ -52,7 +59,13 @@ class PlayerSearchContainer extends Component{
 					</div>
 
 					<div className="results-container">
-						{ allPlayers.map(player => <div key={`${player.id}${player.team_id}`} className="player-result">{ player.name }</div>) }
+
+						{ searchResults.map((player, i) => 
+							<PlayerResult 
+								key={`${player.id}${player.team_id}${i}`} 
+								{...player}
+								onClick={ this._replacePlayer } /> ) }
+
 					</div>
 
 				</div>

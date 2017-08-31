@@ -1,10 +1,22 @@
 // /reducers/index.js
 
-import { find, filter } from 'lodash'
+import { find } from 'lodash'
 
 let init = {};
 
+const popularPlayerTeamIds = [
+  '524', // psg
+  '86', // madrid
+  '64', // liverpool
+  '81', // barcelona
+  '5', // bayern
+  '66', // united
+  '109', // juve
+]
+
 export default function(state = init, action) {
+
+    let newState = null;
 
     switch(action.type) {
 
@@ -13,7 +25,7 @@ export default function(state = init, action) {
           return {...state, ...action.payload};
 
         case '_APP:FETCHED_INIT_DATA':
-          const { favoriteFormation, topPlayers, allTeams } = action.payload;
+          const { favoriteFormation, topPlayers, allTeams, allPlayers } = action.payload;
 
           const topPlayersWithTeamBadge = _initTeamBadgeForEachPlayer({ topPlayers, allTeams });
 
@@ -23,13 +35,27 @@ export default function(state = init, action) {
           // filter out players by position into their own array
           const filteredPositions = _filterPositions({ top11 });
 
+          // filter out "popular players" to init searchResults list
+          const initSearchResults = _getPopularPlayers({ allTeams, allPlayers });
+
       		return {
             ...state, 
             ...action.payload,
             topPlayers: topPlayersWithTeamBadge,
             top11,
             ...filteredPositions,
+            initSearchResults,
+            searchResults: initSearchResults, // init w/ players from popular teams Barcelona, Madrid, Bayern, Juventus, United
           };
+
+        case '_APP:UPDATE_PLAYER_RESULTS':
+          const { searchValue } = action.payload;
+
+          newState = {...state, searchValue};
+
+          newState.searchResults = [...state.allPlayers].filter(player => player.name.toLowerCase().includes(searchValue.toLowerCase()));
+
+          return newState;
 
         default:
             return state;
@@ -37,6 +63,26 @@ export default function(state = init, action) {
     }
 
 };
+
+const _getPopularPlayers = ({ allTeams, allPlayers }) => {
+  // find teams that match popularPlayerTeamIds 
+  const popularTeams = [...allTeams].filter(team => popularPlayerTeamIds.includes(''+team.id));
+  const allPlayersCopy = [...allPlayers];
+
+  let popularPlayers = [];
+
+  // forEach team, get all players for that team id
+  popularTeams.forEach(team => {
+
+    popularPlayers = [
+      ...popularPlayers,
+      ...allPlayersCopy.filter(player => player.team_id == team.id)
+    ]
+
+  })
+
+  return popularPlayers;
+}
 
 const _initTeamBadgeForEachPlayer = ({ topPlayers, allTeams }) => {
     let teamFound = null;
@@ -103,9 +149,12 @@ const _initTop11 = ({ favoriteFormation, topPlayers }) => {
 const findPlayers = ({ allPlayers }) => {
 	const top = ['messi', 'ronaldo', 'neymar', 'hazard', 'coutinho', 'pogba', 'verratti', 'alaba', 'ramos', 'pique', 'chiellini', 'alves'];
 
-	const found = filter(allPlayers.slice(), player => {
+	const found = [...allPlayers].filter(player => {
+
 		console.log(`${player.name} : team_${player.team_id}_player_${player.id}`);
+
 		return player.name.toLowerCase().includes(top);
+
 	});
 
     console.log('found: ', found);

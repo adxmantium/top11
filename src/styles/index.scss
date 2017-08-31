@@ -97,7 +97,7 @@ body{
 	overflow-y: auto;
 
 	.inner-container{
-		border: thin solid red;
+		// border: thin solid red;
 		max-width: 700px;
 		margin: auto;
 	}
@@ -111,7 +111,7 @@ body{
 }
 
 .replacer-container{
-	border: thin solid blue;
+	// border: thin solid blue;
 	text-align: center;
 	margin: 30px 0;
 
@@ -138,10 +138,11 @@ body{
 	padding: 10px;
 	border: none;
 	border-radius: 3px;
+	font-size: 18px;
 }
 
 .results-container{
-	border: thin solid green;
+	// border: thin solid green;
 }
 
 .player-result{
@@ -149,6 +150,7 @@ body{
 	border: 1px solid $Fs;
 	padding: 10px;
 	font-size: 16px;
+	cursor: pointer;
 }
 
 
