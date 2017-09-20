@@ -1,4 +1,4 @@
-// /src/PlayerSearchContainer/index.js
+// /src/PlayerSearchContainer/playerResult.js
 
 import React from 'react'
 

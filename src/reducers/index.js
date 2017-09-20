@@ -25,18 +25,18 @@ export default function(state = init, action) {
           return {...state, ...action.payload};
 
         case '_APP:FETCHED_INIT_DATA':
-          const { favoriteFormation, topPlayers, allTeams, allPlayers } = action.payload;
+          var { favoriteFormation, topPlayers, allTeams, allPlayers } = action.payload;
 
-          const topPlayersWithTeamBadge = _initTeamBadgeForEachPlayer({ topPlayers, allTeams });
+          var topPlayersWithTeamBadge = _initTeamBadgeForEachPlayer({ topPlayers, allTeams });
 
           // reduce top players by the favorite formation
-          const top11 = _initTop11({ favoriteFormation, topPlayers: topPlayersWithTeamBadge });
+          var top11 = _initTop11({ favoriteFormation, topPlayers: topPlayersWithTeamBadge });
 
           // filter out players by position into their own array
-          const filteredPositions = _filterPositions({ top11 });
+          var filteredPositions = _filterPositions({ top11 });
 
           // filter out "popular players" to init searchResults list
-          const initSearchResults = _getPopularPlayers({ allTeams, allPlayers });
+          var initSearchResults = _getPopularPlayers({ allTeams, allPlayers });
 
       		return {
             ...state, 
@@ -54,6 +54,38 @@ export default function(state = init, action) {
           newState = {...state, searchValue};
 
           newState.searchResults = [...state.allPlayers].filter(player => player.name.toLowerCase().includes(searchValue.toLowerCase()));
+
+          return newState;
+
+        case '_APP:REPLACE_PLAYER':
+          const { player: newPlayer } = action.payload;
+
+          newState = {...state};
+
+          var { playerToReplace, allTeams, top11, squad } = newState;
+
+          // loop through each 'zone' of the squad looking for playerToReplace
+          newState.squad = squad.map(zone => {
+
+            return zone.map(player => {
+
+              // find playerToReplace in current top11 and replace w/ newPlayer
+              if( player.id == playerToReplace.id || player.name === playerToReplace.name ){
+
+                // get new players team crest, if player doesn't have it
+                if( !newPlayer.crestUrl ){
+                  const teamFound = find([...state.allTeams], team => team.id == newPlayer.team_id);
+
+                  if( teamFound ) return {...newPlayer, crestUrl: teamFound.crestUrl || ''}; // return newPlayer w/ team crest
+                }
+
+                return newPlayer; // else return newPlayer
+              }
+
+              return player;
+            })
+
+          }) 
 
           return newState;
 
@@ -89,11 +121,14 @@ const _initTeamBadgeForEachPlayer = ({ topPlayers, allTeams }) => {
 
     return topPlayers.map(player => {
 
-      // find team from allTeams list
-      teamFound = find([...allTeams], team => team.id == player.team_id);
+      // only search for player's team crest if they don't already have one
+      if( !player.crestUrl ){
+        // find team from allTeams list
+        teamFound = find([...allTeams], team => team.id == player.team_id);
 
-      // if team is found and not falsy, return new player obj w/ teams crestUrl
-      if( teamFound ) return {...player, crestUrl: teamFound.crestUrl || ''};
+        // if team is found and not falsy, return new player obj w/ teams crestUrl
+        if( teamFound ) return {...player, crestUrl: teamFound.crestUrl || ''};
+      } 
 
       return player;
 

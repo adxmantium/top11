@@ -9,6 +9,7 @@ import PlayerCard from './../Team/playerCard'
 
 // actions 
 import { 
+	replacePlayer,
 	openPlayerSearch,
 	updatePlayerResults,
 } from './../actions'
@@ -21,7 +22,10 @@ class PlayerSearchContainer extends Component{
 	}
 
 	_replacePlayer({ player }){
-		console.log('replace with this player: ', player);
+		const { dispatch } = this.props;
+
+		dispatch( replacePlayer( player ) );
+		dispatch( openPlayerSearch({openPlayerSearch: false}) )
 	}
 
 	render(){

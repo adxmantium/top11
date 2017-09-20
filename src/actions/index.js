@@ -22,6 +22,11 @@ export const openPlayerSearch = data => ({
   payload: data,
 });
 
+export const replacePlayer = player => ({
+  type: '_APP:REPLACE_PLAYER',
+  payload: { player },
+});
+
 export const initData = () => {
   const pending = 'fetching_init_data',
         done = 'fetched_init_data';
